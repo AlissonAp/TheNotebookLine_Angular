@@ -1,0 +1,617 @@
+<html ng-app="myapp">
+<head>
+  <title>Gerenciamento de informações</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-base64/angular-base64.js"></script>
+  <script src="Js/app.js"></script>
+
+  <script src="Js/controllers/pecasController.js"></script>
+  <script src="Js/controllers/pecasControllerCadastrar.js"></script>
+  <script src="Js/controllers/missoesControllerCadastrar.js"></script>
+
+</head>
+<body>
+  <div class="container">
+    <div class="jumbotron">
+
+      <div class="row">
+        <section class="col-md-12">
+          <h1>Gerenciamento de Informações do TheNotebookLine</h1>
+          <p>Espaço destinado para fazer a manutenção do app desenvolvido na disciplina de LpIII</p>
+        </section>
+
+      </div>
+
+    </div>
+    <div class="row">
+      <section class="col-md-6">
+
+
+        <div class="card">
+          <div class="text-center">
+
+
+            <!--  <img src="./assets/imagem1.gif" width="320px" height="200px" /> -->
+            <div class="card card-footer">
+              <button class="btn-primary">Manutenção de peças</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="col-md-6">
+        <div class="card">
+          <div class="text-center">
+            <!--  <img src="./assets/Imagem2.jpg" width="320px" height="200px" /> -->
+            <div class="card card-footer">
+              <button class="btn-primary" (click)="ManutencaoMissoes()">Manutenção de missões</button>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </div>
+    <br />
+    <!-- HTML Form (wrapped in a .bootstrap-iso div) -->
+    <div class="bootstrap-iso">
+      <div class="container-fluid">
+        <div class="row">
+          <div id="formularioPecasContent" class="col-md-6 col-sm-6 col-xs-12">
+            <form role="form" ng-controller="pecaControllerCadastrar"">
+              <div class="form-group ">
+                <label class="control-label " for="name">
+                  Descricao
+                </label>
+                <input class="form-control" ng-init="peca.descricao=''" id="name" name="name" ng-model="peca.descricao" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label requiredField" for="selectCategoria">
+                  Categoria
+                  <span class="asteriskField">
+                    *
+                  </span>
+                </label>
+                <select class="select form-control" id="selectCategoria" ng-init="peca.categoria='1'" ng-model="peca.categoria" name="selectCategoria">
+                  <option selected value="1">
+                    Carca&ccedil;a
+                  </option>
+                  <option value="2">
+                    Placa M&atilde;e
+                  </option>
+                  <option value="3">
+                    Armazenamento
+                  </option>
+                  <option value="4">
+                    Processador
+                  </option>
+                  <option value="5">
+                    Mem&oacute;ria
+                  </option>
+                  <option value="6">
+                    Wireless
+                  </option>
+                  <option value="7">
+                    Bateria
+                  </option>
+                  <option value="8">
+                    Perif&eacute;ricos
+                  </option>
+                  <option value="9">
+                    Tela
+                  </option>
+                  <option value="10">
+                    Sistema
+                  </option>
+                </select>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtInformacoes">
+                  Informa&ccedil;&otilde;es
+                </label>
+                <textarea class="form-control" cols="40" id="txtInformacoes" name="txtInformacoes" ng-init="peca.informacoes=''" ng-model="peca.informacoes" rows="10"></textarea>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtPreco">
+                  Pre&ccedil;o(Ouro)
+                </label>
+                <input class="form-control" id="txtPreco" name="txtPreco" ng-init="peca.preco=''" ng-model="peca.preco" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label requiredField" for="selectNivel">
+                  N&iacute;vel
+                  <span class="asteriskField">
+                    *
+                  </span>
+                </label>
+                <select class="select form-control" id="selectNivel" ng-init="peca.nivel='1'" ng-model="peca.nivel" name="selectNivel">
+                  <option value="1">
+                    N&iacute;vel 1
+                  </option>
+                  <option value="2">
+                    N&iacute;vel 2
+                  </option>
+                  <option value="3">
+                    N&iacute;vel 3
+                  </option>
+                  <option value="4">
+                    N&iacute;vel 4
+                  </option>
+                  <option value="5">
+                    N&iacute;vel 5
+                  </option>
+                  <option value="6">
+                    N&iacute;vel 6
+                  </option>
+                  <option value="7">
+                    N&iacute;vel 7
+                  </option>
+                  <option value="8">
+                    N&iacute;vel 8
+                  </option>
+                  <option value="9">
+                    N&iacute;vel 9
+                  </option>
+                  <option value="10">
+                    N&iacute;vel 10
+                  </option>
+                  <option value="11">
+                    N&iacute;vel 11
+                  </option>
+                </select>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtImagem">
+                  Imagem
+                </label>
+                <input class="form-control" id="txtImagem" name="txtImagem" ng-model="peca.imagem" type="file"/>
+              </div>
+              <br />
+              <br />
+              <H2>Propriedades</H2>
+              <br />
+
+              <div class="form-group ">
+                <label class="control-label " for="txtGbMemoriaRam">
+                  GB Mem&oacute;ria Ram
+                </label>
+                <input class="form-control" id="txtGbMemoriaRam" ng-model="peca.propriedades.GbMemoriaRam" name="txtGbMemoriaRam" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtGbPlacaVideo">
+                  Gb Placa de V&iacute;deo
+                </label>
+                <input class="form-control" id="txtGbPlacaVideo" ng-model="peca.propriedades.GbPlacaVideo" name="txtGbPlacaVideo" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtGbArmazenamento">
+                  Gb Armazenamento
+                </label>
+                <input class="form-control" id="txtGbArmazenamento" ng-model="peca.propriedades.GbArmazenamento" name="txtGbArmazenamento" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtMhzMemoriaRam">
+                  Mhz Memoria Ram
+                </label>
+                <input class="form-control" id="txtMhzMemoriaRam" ng-model="peca.propriedades.MhzMemoriaRam" name="txtMhzMemoriaRam" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtGhzProcessador">
+                  Ghz Processador
+                </label>
+                <input class="form-control" id="txtGhzProcessador" ng-model="peca.propriedades.GhzProcessador" name="txtGhzProcessador" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtGhzPlacaVideo">
+                  Ghz Placa video
+                </label>
+                <input class="form-control" id="txtGhzPlacaVideo" ng-model="peca.propriedades.GhzPlacaVideo" name="txtGhzPlacaVideo" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtRpmLeituraEscrita">
+                  RPM Leitura/Escrita
+                </label>
+                <input class="form-control" id="txtRpmLeituraEscrita" ng-model="peca.propriedades.RpmLeituraEscrita" name="txtRpmLeituraEscrita" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtNucleosProcessador">
+                  Nucleos Processador
+                </label>
+                <input class="form-control" id="txtNucleosProcessador" ng-model="peca.propriedades.NucleosProcessador" name="txtNucleosProcessador" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtModeloProcessador">
+                  Modelo processador
+                </label>
+                <input class="form-control" id="txtModeloProcessador" ng-model="peca.propriedades.ModeloProcessador" name="txtModeloProcessador" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtBitsPlacaVideo">
+                  Bits Placa de Video
+                </label>
+                <input class="form-control" id="txtBitsPlacaVideo" ng-model="peca.propriedades.BitsPlacaVideo" name="txtBitsPlacaVideo" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtcacheProcessador">
+                  Cache Processador
+                </label>
+                <input class="form-control" id="txtcacheProcessador" ng-model="peca.propriedades.cacheProcessador" name="txtcacheProcessador" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtcacheArmazenamento">
+                  Cache Armazenamento
+                </label>
+                <input class="form-control" id="txtcacheArmazenamento" ng-model="peca.propriedades.cacheArmazenamento" name="txtcacheArmazenamento" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtMahBateria">
+                  Mah Bateria
+                </label>
+                <input class="form-control" id="txtMahBateria"  ng-model="peca.propriedades.MahBateria" name="txtMahBateria" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtCelulasBateria">
+                  Celulas Bateria
+                </label>
+                <input class="form-control" id="txtCelulasBateria" ng-model="peca.propriedades.CelulasBateria" name="txtCelulasBateria" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtTipoTela">
+                  Tipo tela
+                </label>
+                <input class="form-control" id="txtTipoTela" ng-model="peca.propriedades.TipoTela" name="txtTipoTela" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtTamanhoTela">
+                  Tamanho tela
+                </label>
+                <input class="form-control" id="txtTamanhoTela" ng-model="peca.propriedades.TamanhoTela" name="txtTamanhoTela" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtConexoesUSB">
+                  Conexões USB
+                </label>
+                <input class="form-control" id="txtConexoesUSB" ng-model="peca.propriedades.ConexoesUSB" name="txtConexoesUSB" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtPossuiBluetooth">
+                  Possui Bluetooth
+                </label>
+                <select class="select form-control" id="selectPossuiBluetooth" ng-init="peca.propriedades.PossuiBluetooth='S'" ng-model="peca.propriedades.PossuiBluetooth" name="selectPossuiBluetooth">
+                  <option value="S">
+                    Sim
+                  </option>
+                  <option value="N">
+                    Não
+                  </option>
+                </select>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtPossuiWebCam">
+                  Possui Webcam
+                </label>
+                <select class="select form-control" id="selectPossuiWebcam" ng-init="peca.propriedades.PossuiWebcam='S'" ng-model="peca.propriedades.PossuiWebcam" name="selectPossuiWebcam">
+                  <option value="S">
+                    Sim
+                  </option>
+                  <option value="N">
+                    Não
+                  </option>
+                </select>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtPossuiLeitorCd_Dvd">
+                  Possui Leitor Cd Dvd
+                </label>
+                <select class="select form-control" id="selectPossuiLeitorCdDvd" ng-init="peca.propriedades.PossuiLeitorCdDvd='S'" ng-model="peca.propriedades.PossuiLeitorCdDvd" name="selectPossuiLeitorCdDvd">
+                  <option value="S">
+                    Sim
+                  </option>
+                  <option value="N">
+                    Não
+                  </option>
+                </select>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtResistenciaCarcaca">
+                  Resistência Carcaça
+                </label>
+                <select class="select form-control" id="selectResistenciaCarcaca" ng-init="peca.propriedades.ResistenciaCarcaca='Fraca'" ng-model="peca.propriedades.ResistenciaCarcaca" name="selectResistenciaCarcaca">
+                  <option value="Fraca">
+                    Fraca
+                  </option>
+                  <option value="Media">
+                    Média
+                  </option>
+                  <option value="Forte">
+                    Forte
+                  </option>
+                </select>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtPesoCarcaca">
+                  Peso Carcaça
+                </label>
+                <input class="form-control" id="txtPesoCarcaca" ng-model="peca.propriedades.PesoCarcaca" name="txtPesoCarcaca" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtPossuiEntradaHDMI">
+                  Possui entrada HDMI
+                </label>
+                <select class="select form-control" id="selectPossuiEntradaHDMI" ng-init="peca.propriedades.PossuiEntradaHDMI='S'" ng-model="peca.propriedades.PossuiEntradaHDMI" name="selectPossuiEntradaHDMI">
+                  <option value="S">
+                    Sim
+                  </option>
+                  <option value="N">
+                    Não
+                  </option>
+                </select>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtSistemaOperacional">
+                  Sistema Operacional
+                </label>
+                <select class="select form-control" id="selectSistemaOperacional" ng-init="peca.propriedades.SistemaOperacional='W'" ng-model="peca.propriedades.SistemaOperacional" name="selectSistemaOperacional">
+                  <option value="W">
+                    Windows
+                  </option>
+                  <option value="L">
+                    Linux
+                  </option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <div>
+                  <button class="btn btn-primary" ng-click="cadastrar(peca)" name="submit" type="submit">
+                    Cadastrar
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div id="formularioMissoesContent" class="col-md-6 col-sm-6 col-xs-12">
+
+            <form role="form" ng-controller="missoesControllerCadastrar"">
+              <div class="form-group ">
+                <label class="control-label " for="Missaoname">
+                  Nome
+                </label>
+                <input class="form-control" ng-init="missao.nome=''" id="Missaoname" name="Missaoname" ng-model="missao.nome" type="text"/>
+              </div>
+
+              <div class="form-group ">
+                <label class="control-label " for="txtObjetivo">
+                  Objetivo
+                </label>
+                <textarea class="form-control" cols="40" id="txtObjetivo" name="txtObjetivo" ng-init="missao.objetivo=''" ng-model="missao.objetivo" rows="5"></textarea>
+              </div>
+
+              <br />
+              <H2>Regras</H2>
+              <br />
+
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasGbMemoriaRam">
+                  GB Mem&oacute;ria Ram
+                </label>
+                <input class="form-control" id="txtregrasGbMemoriaRam" ng-model="missao.regras.regraGbMemoriaRam" name="txtregrasGbMemoriaRam" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasGbPlacaVideo">
+                  Gb Placa de V&iacute;deo
+                </label>
+                <input class="form-control" id="txtregrasGbPlacaVideo" ng-model="missao.regras.regraGbPlacaVideo" name="txtregrasGbPlacaVideo" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasGbArmazenamento">
+                  Gb Armazenamento
+                </label>
+                <input class="form-control" id="txtregrasGbArmazenamento" ng-model="missao.regras.regraGbArmazenamento" name="txtregrasGbArmazenamento" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasMhzMemoriaRam">
+                  Mhz Memoria Ram
+                </label>
+                <input class="form-control" id="txtregrasMhzMemoriaRam" ng-model="missao.regras.regraMhzMemoriaRam" name="txtregrasMhzMemoriaRam" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasGhzProcessador">
+                  Ghz Processador
+                </label>
+                <input class="form-control" id="txtregrasGhzProcessador" ng-model="missao.regras.regraGhzProcessador" name="txtregrasGhzProcessador" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasGhzPlacaVideo">
+                  Ghz Placa video
+                </label>
+                <input class="form-control" id="txtregrasGhzPlacaVideo" ng-model="missao.regras.regraGhzPlacaVideo" name="txtregrasGhzPlacaVideo" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasRpmLeituraEscrita">
+                  RPM Leitura/Escrita
+                </label>
+                <input class="form-control" id="txtregrasRpmLeituraEscrita" ng-model="missao.regras.regraRpmLeituraEscrita" name="txtregrasRpmLeituraEscrita" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasNucleosProcessador">
+                  Nucleos Processador
+                </label>
+                <input class="form-control" id="txtregrasNucleosProcessador" ng-model="missao.regras.regraNucleosProcessador" name="txtregrasNucleosProcessador" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasModeloProcessador">
+                  Modelo processador
+                </label>
+                <input class="form-control" id="txtregrasModeloProcessador" ng-model="missao.regras.regraModeloProcessador" name="txtregrasModeloProcessador" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasBitsPlacaVideo">
+                  Bits Placa de Video
+                </label>
+                <input class="form-control" id="txtregrasBitsPlacaVideo" ng-model="missao.regras.regraBitsPlacaVideo" name="txtregrasBitsPlacaVideo" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrascacheProcessador">
+                  Cache Processador
+                </label>
+                <input class="form-control" id="txtregrascacheProcessador" ng-model="missao.regras.regracacheProcessador" name="txtregrascacheProcessador" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrascacheArmazenamento">
+                  Cache Armazenamento
+                </label>
+                <input class="form-control" id="txtregrascacheArmazenamento" ng-model="missao.regras.regracacheArmazenamento" name="txtregrascacheArmazenamento" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasMahBateria">
+                  Mah Bateria
+                </label>
+                <input class="form-control" id="txtregrasMahBateria"  ng-model="missao.regras.regraMahBateria" name="txtregrasMahBateria" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasCelulasBateria">
+                  Celulas Bateria
+                </label>
+                <input class="form-control" id="txtregrasCelulasBateria" ng-model="missao.regras.regraCelulasBateria" name="txtregrasCelulasBateria" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasTipoTela">
+                  Tipo tela
+                </label>
+                <input class="form-control" id="txtregrasTipoTela" ng-model="missao.regras.regraTipoTela" name="txtregrasTipoTela" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasTamanhoTela">
+                  Tamanho tela
+                </label>
+                <input class="form-control" id="txtregrasTamanhoTela" ng-model="missao.regras.regraTamanhoTela" name="txtregrasTamanhoTela" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasConexoesUSB">
+                  Conexões USB
+                </label>
+                <input class="form-control" id="txtregrasConexoesUSB" ng-model="missao.regras.regraConexoesUSB" name="txtregrasConexoesUSB" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasPossuiBluetooth">
+                  Possui Bluetooth
+                </label>
+                <select class="select form-control" id="selectPossuiBluetooth" ng-init="missao.regras.regraPossuiBluetooth='N'" ng-model="missao.regras.regraPossuiBluetooth" name="selectPossuiBluetooth">
+                  <option value="S">
+                    Sim
+                  </option>
+                  <option value="N">
+                    Não
+                  </option>
+                </select>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasPossuiWebCam">
+                  Possui Webcam
+                </label>
+                <select class="select form-control" id="selectPossuiWebcam" ng-init="missao.regras.regraPossuiWebcam='N'" ng-model="missao.regras.regraPossuiWebcam" name="selectPossuiWebcam">
+                  <option value="S">
+                    Sim
+                  </option>
+                  <option value="N">
+                    Não
+                  </option>
+                </select>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasPossuiLeitorCd_Dvd">
+                  Possui Leitor Cd Dvd
+                </label>
+                <select class="select form-control" id="selectPossuiLeitorCdDvd" ng-init="missao.regras.regraPossuiLeitorCdDvd='N'" ng-model="missao.regras.regraPossuiLeitorCdDvd" name="selectPossuiLeitorCdDvd">
+                  <option value="S">
+                    Sim
+                  </option>
+                  <option value="N">
+                    Não
+                  </option>
+                </select>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasResistenciaCarcaca">
+                  Resistência Carcaça
+                </label>
+                <select class="select form-control" id="selectResistenciaCarcaca" ng-init="missao.regras.regraResistenciaCarcaca='Fraca'" ng-model="missao.regras.regraResistenciaCarcaca" name="selectResistenciaCarcaca">
+                  <option value="Fraca">
+                    Fraca
+                  </option>
+                  <option value="Media">
+                    Média
+                  </option>
+                  <option value="Forte">
+                    Forte
+                  </option>
+                </select>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasPesoCarcaca">
+                  Peso Carcaça
+                </label>
+                <input class="form-control" id="txtregrasPesoCarcaca" ng-model="missao.regras.regraPesoCarcaca" name="txtregrasPesoCarcaca" type="text"/>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasPossuiEntradaHDMI">
+                  Possui entrada HDMI
+                </label>
+                <select class="select form-control" id="selectPossuiEntradaHDMI" ng-init="missao.regras.regraPossuiEntradaHDMI='N'" ng-model="missao.regras.regraPossuiEntradaHDMI" name="selectPossuiEntradaHDMI">
+                  <option value="S">
+                    Sim
+                  </option>
+                  <option value="N">
+                    Não
+                  </option>
+                </select>
+              </div>
+              <div class="form-group ">
+                <label class="control-label " for="txtregrasSistemaOperacional">
+                  Sistema Operacional
+                </label>
+                <select class="select form-control" id="selectSistemaOperacional" ng-init="missao.regras.regraSistemaOperacional='W'" ng-model="missao.regras.regraSistemaOperacional" name="selectSistemaOperacional">
+                  <option value="W">
+                    Windows
+                  </option>
+                  <option value="L">
+                    Linux
+                  </option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <div>
+                  <button class="btn btn-primary" ng-click="cadastrar(missao)" name="submit" type="submit">
+                    Cadastrar
+                  </button>
+                </div>
+              </div>
+            </form>
+
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+<!--
+    <div class="container" ng-controller="pecaController">
+
+      <button type="button" class="btn btn-default" ng-click="listar()">Atualizar Peças</button>
+      <table class="table">
+        <tr ng-repeat="peca in pecas">
+          <td>{{peca.descricao}}</td>
+          <td>{{peca.categoria}}</td>
+          <td>{{peca.preco}}</td>
+        </tr>
+      </table>
+    </div>
+ -->
+  </div>
+
+</body>
+</html>
